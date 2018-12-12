@@ -5,9 +5,6 @@
   let previousElement;
   let parentElement;
   let childrenElement;
-
-  let offsetX;
-  let offsetY;
   
 
   function markElement(element) {
@@ -101,8 +98,6 @@
 
     document.onmousemove = function(e) {
       moveAt(e);
-      offsetX = e.offsetX;
-      offsetY = e.offsetY;
     }
 
     form.onmouseup = function() {
