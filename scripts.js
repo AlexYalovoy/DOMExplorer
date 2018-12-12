@@ -98,11 +98,11 @@
   function dragListener(e) {
     moveAt(e);
     form.style.zIndex = 1000000;
-    offsetX = e.offsetX;
-    offsetY = e.offsetY;
 
     document.onmousemove = function(e) {
       moveAt(e);
+      offsetX = e.offsetX;
+      offsetY = e.offsetY;
     }
 
     form.onmouseup = function() {
@@ -116,8 +116,9 @@
   }
 
   function moveAt(e) {
-    form.style.left = e.clientX - offsetX  + 'px';
-    form.style.top = e.clientY - offsetY  + 'px';
+    const panel_top = document.getElementsByClassName('panel_top')[0];
+    form.style.left = e.clientX - panel_top.offsetWidth/2  + 'px';
+    form.style.top = e.clientY - panel_top.offsetHeight/2  + 'px';
     
   }
 
@@ -127,11 +128,19 @@
     style.innerText = `.domExplorer {
       background-color: #f4c9ff;
       width: 400px;
-      padding: 10px;
+      padding: 50px 10px 10px 10px;
     
       position: fixed;
       top: 50px;
       left: 50px;
+    }
+    .panel_top {
+      height: 40px;
+      width: 100%;
+      background-color: grey;
+      position: absolute;
+      top: 0;
+      left: 0;
     }
     .exitBtn {
       position: absolute;
@@ -166,9 +175,13 @@
 
     const container = document.createElement('div');
     container.className = 'domExplorer';
-    container.onmousedown = dragListener;
   
     const fragment = document.createDocumentFragment();
+
+    const panel_top = document.createElement('div');
+    panel_top.className = 'panel_top';
+    panel_top.addEventListener('mousedown', dragListener, false);
+    fragment.append(panel_top);
   
     const h1 = document.createElement('h1');
     h1.innerText = 'Search node element';
