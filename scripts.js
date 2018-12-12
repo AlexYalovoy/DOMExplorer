@@ -118,7 +118,13 @@
   }
 
   (function explorerInit() {
-    
+    const fontAwesome = document.createElement('link');
+    fontAwesome.rel = 'stylesheet';
+    fontAwesome.href = 'https://use.fontawesome.com/releases/v5.5.0/css/all.css';
+    fontAwesome.integrity='sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU';
+    fontAwesome.crossOrigin="anonymous";
+    document.head.append(fontAwesome);
+
     const style = document.createElement('style');
     style.innerText = `.domExplorer {
       background-color: #f4c9ff;
